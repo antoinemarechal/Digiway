@@ -2,19 +2,31 @@
     <string name="app_name">Digiway</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Nom d\'utilisateur</string>
+    <string name="prompt_username">Nom d\'utilisateur</string>
     <string name="prompt_password">Mot de passe</string>
-    <string name="action_sign_in">Se connecter ou s\'enregistrer</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="action_sign_in">Se connecter</string>
+    <string name="action_register">S\'enregistrer</string>
+    <string name="action_confirm_registration">Confirmer l\'inscription</string>
+    <string name="error_invalid_email">Nom d\'utilisateur invalide</string>
+    <string name="error_invalid_password">Mot de passe invalide</string>
+    <string name="error_incorrect_password">Mot de passe incorrect</string>
+    <string name="error_field_required">Ce champ est obligatoire</string>
+    <string name="error_data_access">Une erreur s\'est produite, veuillez réessayer</string>
+    <string name="error_sha512">La technologie d\'authentification n\'est pas supportée sur cet appareil</string>
 
-    <string name="title_activity_login">Sign in</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">Digiway (logo)</string>
+    <!-- Strings related to registration -->
+    <string name="title_activity_register">Inscription</string>
+    <string name="prompt_first_name">Prénom</string>
+    <string name="prompt_last_name">Nom</string>
+    <string name="prompt_birthday">Date de naissance</string>
+    <string name="prompt_address">Adresse</string>
+    <string name="prompt_confirm_password">Confirmation du mot de passe</string>
+    <string name="prompt_street_name">Nom de rue</string>
+    <string name="prompt_street_number">Numéro</string>
+    <string name="prompt_city">Ville</string>
+    <string name="prompt_zip_code">Code postal</string>
+    <string name="error_data_parsing">Une erreur s\'est produite lors du traitement des données</string>
+    <string-array name="countries">
+        <item>Belgique</item>
+    </string-array>
 </resources>

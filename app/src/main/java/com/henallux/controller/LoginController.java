@@ -1,16 +1,17 @@
 package com.henallux.controller;
 
-/**
- * Created by Antoine on 20-11-17.
- */
+import com.henallux.dao.concrete.UsersAPIAccess;
+import com.henallux.exceptions.DataAccessException;
+import com.henallux.model.User;
+
+import java.util.ArrayList;
 
 public class LoginController
 {
-    public void onLogin()
-    {}
-
-    public void onRegister()
+    public ArrayList<User> getAllUsers() throws DataAccessException
     {
-        // test
+        ArrayList<User> users = new UsersAPIAccess().getAllUsers();
+
+        return users == null ? new ArrayList<User>() : users;
     }
 }
