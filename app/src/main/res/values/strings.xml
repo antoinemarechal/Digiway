@@ -7,12 +7,13 @@
     <string name="action_sign_in">Se connecter</string>
     <string name="action_register">S\'enregistrer</string>
     <string name="action_confirm_registration">Confirmer l\'inscription</string>
-    <string name="error_invalid_email">Nom d\'utilisateur invalide</string>
+    <string name="error_invalid_username">Nom d\'utilisateur invalide</string>
     <string name="error_invalid_password">Mot de passe invalide</string>
     <string name="error_incorrect_password">Mot de passe incorrect</string>
     <string name="error_field_required">Ce champ est obligatoire</string>
     <string name="error_data_access">Une erreur s\'est produite, veuillez réessayer</string>
-    <string name="error_sha512">La technologie d\'authentification n\'est pas supportée sur cet appareil</string>
+    <string name="error_data_parsing">Une erreur s\'est produite lors du traitement des données</string>
+    <string name="error_sha512">La technologie de chiffrement du mot de passe n\'est pas supportée sur cet appareil</string>
 
     <!-- Strings related to registration -->
     <string name="title_activity_register">Inscription</string>
@@ -25,8 +26,17 @@
     <string name="prompt_street_number">Numéro</string>
     <string name="prompt_city">Ville</string>
     <string name="prompt_zip_code">Code postal</string>
-    <string name="error_data_parsing">Une erreur s\'est produite lors du traitement des données</string>
+    <string name="error_invalid_first_name">Prénom invalide</string>
+    <string name="error_invalid_last_name">Nom invalide</string>
+    <string name="error_invalid_street_number">Numéro de maison invalide</string>
+    <string name="error_invalid_street_name">Nom de rue invalide</string>
+    <string name="error_invalid_city">Nom de ville invalide</string>
+    <string name="error_invalid_zip_code">Code postal invalide</string>
+    <string name="error_malformed_password">- Doit faire plus 5 caractères\n- Doit contenir au moins un chiffre\n- Doit contenir au moins une lettre</string>
+    <string name="error_invalid_confirmation">Les mots de passe doivent correspondre</string>
     <string-array name="countries">
         <item>Belgique</item>
     </string-array>
+
+    <string name="global_date_format">dd/MM/yyyy</string>
 </resources>

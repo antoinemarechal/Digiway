@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,21 +17,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.henallux.controller.LoginController;
+import com.henallux.controller.ApplicationController;
 import com.henallux.exceptions.DataAccessException;
 import com.henallux.model.User;
+import com.henallux.util.Encryption;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity
 {
-    private UserLoginTask authTask = null;
+    public static final String EXTRA_MESSAGE_ID = "desiredUsername";
+
+    private LoginTask authTask = null;
 
     private TextView usernameField;
     private EditText passwordField;
-
 
     private View progressBar;
     private View loginForm;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                intent.putExtra("desiredUsername", usernameField.getText());
+                intent.putExtra(EXTRA_MESSAGE_ID, usernameField.getText().toString());
 
                 startActivity(intent);
             }
@@ -91,24 +92,18 @@ public class LoginActivity extends AppCompatActivity
     {
         if (authTask == null)
         {
-            View focusView;
+            View focusView = null;
             String username;
             String password;
 
-            boolean cancel;
+            boolean cancel = false;
 
-            // Reset errors.
             usernameField.setError(null);
             passwordField.setError(null);
 
-            // Store values at the time of the login attempt.
             username = usernameField.getText().toString();
             password = passwordField.getText().toString();
 
-            focusView = null;
-            cancel = false;
-
-            // Check for a valid password, if the user entered one.
             if (!isPasswordValid(password))
             {
                 passwordField.setError(getString(R.string.error_invalid_password));
@@ -116,7 +111,6 @@ public class LoginActivity extends AppCompatActivity
                 cancel = true;
             }
 
-            // Check for a valid username.
             if (TextUtils.isEmpty(username))
             {
                 usernameField.setError(getString(R.string.error_field_required));
@@ -125,7 +119,7 @@ public class LoginActivity extends AppCompatActivity
             }
             else if (!isUsernameValid(username))
             {
-                usernameField.setError(getString(R.string.error_invalid_email));
+                usernameField.setError(getString(R.string.error_invalid_username));
                 focusView = usernameField;
                 cancel = true;
             }
@@ -136,11 +130,12 @@ public class LoginActivity extends AppCompatActivity
             }
             else
             {
-                showProgress(true);
-
                 try
                 {
-                    authTask = new UserLoginTask(username, password);
+                    authTask = new LoginTask(username, password);
+
+                    showProgress(true);
+
                     authTask.execute();
                 }
                 catch (NoSuchAlgorithmException e)
@@ -151,14 +146,14 @@ public class LoginActivity extends AppCompatActivity
         }
     }
 
-    private boolean isUsernameValid(String username) // TODO : vraie longueur
+    private boolean isUsernameValid(String username)
     {
-        return username.length() < 30;
+        return username.length() < 40;
     }
 
-    private boolean isPasswordValid(String password) // TODO : vraie longueur
+    private boolean isPasswordValid(String password)
     {
-        return password != null && (password.length() > 3 && password.length() < 30);
+        return password != null && (password.length() > 5 && password.length() < 40);
     }
 
     private void showProgress(final boolean show)
@@ -182,40 +177,26 @@ public class LoginActivity extends AppCompatActivity
         });
     }
 
-    private class UserLoginTask extends AsyncTask<String, Void, ArrayList<User>>
+    private class LoginTask extends AsyncTask<Void, Void, User>
     {
         private final String username;
         private final String password;
 
-        UserLoginTask(String username, String password) throws NoSuchAlgorithmException
+        LoginTask(String username, String password) throws NoSuchAlgorithmException
         {
             this.username = username;
-            this.password = hashPassword(password);
-        }
-
-        private String hashPassword(String password) throws NoSuchAlgorithmException
-        {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
-            byte[] digest = messageDigest.digest(password.getBytes());
-            StringBuilder sb = new StringBuilder();
-
-            for (byte aDigest : digest)
-            {
-                sb.append(Integer.toString((aDigest & 0xff) + 0x100, 16).substring(1));
-            }
-
-            return sb.toString();
+            this.password = Encryption.encryptSHA512(password);
         }
 
         @Override
-        protected ArrayList<User> doInBackground(String... strings)
+        protected User doInBackground(Void... strings)
         {
-            LoginController controller = new LoginController();
-            ArrayList<User> users = new ArrayList<>();
+            ApplicationController controller = new ApplicationController();
+            User user = null;
 
             try
             {
-                users = controller.getAllUsers();
+                user = controller.getUserWithUsername(username);
             }
             catch (final DataAccessException e)
             {
@@ -227,39 +208,32 @@ public class LoginActivity extends AppCompatActivity
                 });
             }
 
-            return users;
+            return user;
         }
 
         @Override
-        protected void onPostExecute(ArrayList<User> users)
+        protected void onPostExecute(User user)
         {
-            User currentUser = null;
-
             authTask = null;
             showProgress(false);
 
-            //if(users.stream().filter(u -> u.getUsername() == username && u.getHashedPassword() == password).count() == 1)
-
-            for (int i = 0; currentUser == null && i < users.size(); i++)
+            if(user != null && user.getHashedPassword().equals(password))
             {
-                User u = users.get(i);
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                intent.putExtra("currentUser", user);
 
-                if (u.getUsername().equals(username))
-                    if (u.getHashedPassword().equals(password))
-                        currentUser = u;
-            }
-
-            if (currentUser == null)
-            {
-                passwordField.setError(getString(R.string.error_incorrect_password));
-                passwordField.requestFocus();
+                startActivity(intent);
             }
             else
             {
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                intent.putExtra("currentUser", currentUser);
-
-                startActivity(intent);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        passwordField.setError(getString(R.string.error_incorrect_password));
+                        passwordField.requestFocus();
+                    }
+                }, 300);
             }
         }
 
