@@ -163,7 +163,8 @@ public class LoginActivity extends AppCompatActivity
         loginForm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
         loginForm.animate().setDuration(shortAnimTime).alpha(show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
             @Override
-            public void onAnimationEnd(Animator animation) {
+            public void onAnimationEnd(Animator animation)
+            {
                 loginForm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
             }
         });
@@ -171,7 +172,8 @@ public class LoginActivity extends AppCompatActivity
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         progressBar.animate().setDuration(shortAnimTime).alpha(show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
             @Override
-            public void onAnimationEnd(Animator animation) {
+            public void onAnimationEnd(Animator animation)
+            {
                 progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
             }
         });
@@ -223,9 +225,12 @@ public class LoginActivity extends AppCompatActivity
                 intent.putExtra("currentUser", user);
 
                 startActivity(intent);
+
+                finish();
             }
             else
             {
+                // this delay is set to avoid a graphical bug where the error message goes under the buttons
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run()

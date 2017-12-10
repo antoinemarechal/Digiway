@@ -1,5 +1,7 @@
 package com.henallux.digiway;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.henallux.controller.ApplicationController;
+import com.henallux.exceptions.AlreadyExistingException;
 import com.henallux.exceptions.DataAccessException;
 import com.henallux.model.User;
 import com.henallux.util.Encryption;
@@ -68,8 +71,8 @@ public class RegisterActivity extends AppCompatActivity
         passwordField = (EditText) findViewById(R.id.registration_password);
         passwordConfirmationField = (EditText) findViewById(R.id.registration_confirm_password);
 
-        progressBar = findViewById(R.id.login_progress);//FIXME
-        registrationForm = findViewById(R.id.login_form);//FIXME
+        progressBar = findViewById(R.id.registration_progress);
+        registrationForm = findViewById(R.id.registration_form);
 
         Button registerButton = (Button) findViewById(R.id.registration_confirm_button);
         registerButton.setOnClickListener(new OnClickListener() {
@@ -359,47 +362,36 @@ public class RegisterActivity extends AppCompatActivity
         return passwordConfirmation.equals(password);
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-        private void showProgress(final boolean show) {/*
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+    private void showProgress(final boolean show)
+    {
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+        registrationForm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+        registrationForm.animate().setDuration(shortAnimTime).alpha(show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation)
+            {
+                registrationForm.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
+            }
+        });
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }*/
+        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+        progressBar.animate().setDuration(shortAnimTime).alpha(show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation)
+            {
+                progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
     }
 
+    private enum TaskResult {
+        NO_ERROR,
+        USERNAME_ALREADY_TAKEN,
+        GENERIC_ERROR
+    }
 
-
-
-
-
-    public class RegistrationTask extends AsyncTask<Void, Void, Boolean> {
+    private class RegistrationTask extends AsyncTask<Void, Void, TaskResult> {
 
         private final User user;
 
@@ -409,7 +401,7 @@ public class RegisterActivity extends AppCompatActivity
         }
 
         @Override
-        protected Boolean doInBackground(Void... params)
+        protected TaskResult doInBackground(Void... params)
         {
             ApplicationController controller = new ApplicationController();
 
@@ -417,32 +409,47 @@ public class RegisterActivity extends AppCompatActivity
             {
                 controller.registerUser(user);
 
-                return true;
+                return TaskResult.NO_ERROR;
             }
-            catch (DataAccessException e)
+            catch (AlreadyExistingException e)
             {
-                return false;
+                return TaskResult.USERNAME_ALREADY_TAKEN;
+            }
+            catch (final DataAccessException e)
+            {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        Toast.makeText(RegisterActivity.this, getString(e.getMessageId()), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                return TaskResult.GENERIC_ERROR;
             }
         }
 
         @Override
-        protected void onPostExecute(final Boolean success)
+        protected void onPostExecute(final TaskResult success)
         {
             registrationTask = null;
             showProgress(false);
 
-            if (success)
+            switch (success)
             {
-                finish();
+                case NO_ERROR:
+                    finish();
 
-                // TODO toast comfirmant l'inscription
-            }
-            else // FIXME
-            {
-                passwordField.setError(getString(R.string.error_incorrect_password));
-                passwordField.requestFocus();
+                    Toast.makeText(RegisterActivity.this, getString(R.string.info_registration_confirmed), Toast.LENGTH_LONG).show();
+                    break;
 
-                //Toast.makeText(LoginActivity.this, getString(e.getMessageId()), Toast.LENGTH_LONG).show();
+                case USERNAME_ALREADY_TAKEN:
+                    usernameField.setError(getString(R.string.error_username_already_taken));
+                    usernameField.requestFocus();
+                    break;
+
+                default :
+                    break;
             }
         }
 
@@ -454,4 +461,3 @@ public class RegisterActivity extends AppCompatActivity
         }
     }
 }
-

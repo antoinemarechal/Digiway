@@ -1,35 +1,27 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="20dp"
-    android:layout_gravity="center"
     android:gravity="center"
-    android:background="@drawable/background_2">
+    android:layout_gravity="center">
 
-    <ImageView
-        android:id="@+id/app_start_logo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="-210dp"
-        android:adjustViewBounds="true"
-        app:srcCompat="@drawable/logo_resized" />
-
-    <!-- Login progress -->
     <ProgressBar
-        android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
+        android:id="@+id/login_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
+        android:layout_centerInParent="true"
         android:visibility="gone" />
 
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="-60dp">
 
         <LinearLayout
             android:id="@+id/login_form_layout"
@@ -39,17 +31,24 @@
             android:layout_gravity="center"
             android:gravity="center">
 
+            <ImageView
+                android:id="@+id/app_start_logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="150dp"
+                android:adjustViewBounds="true"
+                android:layout_marginBottom="30dp"
+                android:contentDescription="@string/descr_app_logo"
+                app:srcCompat="@drawable/logo_resized" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
+                    style="@style/DefaultFormFieldStyle"
                     android:id="@+id/login_username_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_username"
-                    android:inputType="text"
-                    android:maxLines="1" />
+                    android:hint="@string/prompt_username" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -57,34 +56,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
+                    style="@style/DefaultFormFieldStyle"
                     android:id="@+id/login_password_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
-                    android:inputType="textPassword"
-                    android:maxLines="1" />
+                    android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
 
             <Button
+                style="@style/DefaultButtonStyle"
                 android:id="@+id/login_sign_in_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:text="@string/action_sign_in" />
 
             <Button
+                style="@style/DefaultButtonStyle"
                 android:id="@+id/login_register_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_register"
-                android:textStyle="bold" />
+                android:text="@string/action_register" />
 
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</RelativeLayout >
