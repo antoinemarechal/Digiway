@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimaryBackup">#3F51B5</color>
+    <color name="colorPrimaryBackup2">#16a6ff</color>
     <color name="colorAccentBackup">#FF4081</color>
 
-    <color name="colorPrimary">#16a6ff</color>
+    <color name="colorPrimary">#36C9E6</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#16A6FF</color>
+    <color name="colorAccent">#108090</color>
     <color name="colorTextFields">#d6d6d6</color>
 
     <color name="black_overlay">#66000000</color>

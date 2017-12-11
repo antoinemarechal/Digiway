@@ -9,7 +9,7 @@
     <style name="FullscreenTheme" parent="AppTheme">
         <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
         <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@drawable/background_2</item>
+        <item name="android:windowBackground">@drawable/background</item>
         <item name="android:textColorHint">#000000</item>
         <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
@@ -26,9 +26,9 @@
 
     <style name="DefaultButtonStyle">
         <item name="android:backgroundTint" tools:targetApi="lollipop">@android:color/background_light</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">250dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">16dp</item>
     </style>
