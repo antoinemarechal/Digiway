@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.henallux.digiway">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.henallux.yetee">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -13,11 +19,23 @@
         android:supportsRtl="true"
         android:theme="@style/FullscreenTheme">
 
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenThemeNoTitleBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenThemeNoTitleBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,18 +51,84 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.henallux.digiway.LoginActivity" />
+                android:value="com.henallux.yetee.LoginActivity" />
         </activity>
 
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home">
+            android:label="@string/app_name">
         </activity>
 
         <activity
-            android:name=".SettingsActivity">
+            android:name=".EventListActivity"
+            android:label="@string/title_activity_event_list"
+            android:parentActivityName=".HomeActivity">
 
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.henallux.yetee.HomeActivity" />
         </activity>
+
+        <activity
+            android:name=".EventMapActivity"
+            android:label="@string/title_activity_event_map"
+            android:parentActivityName=".HomeActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.henallux.yetee.HomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".FindYourActivity"
+            android:label="@string/title_activity_find_your">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.henallux.yetee.HomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".BalanceActivity"
+            android:label="@string/title_activity_balance"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.henallux.yetee.HomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".SocialActivity"
+            android:label="@string/title_activity_social"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.henallux.yetee.HomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".ScannerActivity"
+            android:label="@string/title_activity_scanner"
+            android:parentActivityName=".HomeActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.henallux.yetee.HomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.henallux.yetee.HomeActivity" />
+        </activity>
+
     </application>
 
 </manifest>

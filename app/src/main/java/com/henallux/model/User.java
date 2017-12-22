@@ -167,4 +167,9 @@ public class User implements Serializable
     {
         this.balance = balance;
     }
+
+    public void addMoney(double deposit)
+    {
+        this.balance += deposit;
+    }
 }

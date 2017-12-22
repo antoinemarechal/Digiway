@@ -1,9 +1,9 @@
 package com.henallux.dao.concrete;
 
 import com.henallux.dao.UserDataAccess;
-import com.henallux.digiway.R;
-import com.henallux.exceptions.AlreadyExistingException;
-import com.henallux.exceptions.DataAccessException;
+import com.henallux.yetee.R;
+import com.henallux.exception.AlreadyExistingException;
+import com.henallux.exception.DataAccessException;
 import com.henallux.model.User;
 
 import org.json.JSONArray;
@@ -21,6 +21,20 @@ import java.util.Calendar;
 
 public class UserAPIAccess implements UserDataAccess
 {
+    private final String ID_ID = "userId";
+    private final String FIRST_NAME_ID = "firstName";
+    private final String LAST_NAME_ID = "lastName";
+    private final String BIRTHDAY_ID = "birthDate";
+    private final String ADDRESS_ID = "address";
+    private final String CITY_ID = "city";
+    private final String ZIP_CODE_ID = "zip";
+    private final String USERNAME_ID = "login";
+    private final String PASSWORD_ID = "password";
+    private final String IBAN_ACCOUNT_ID = "ibanAccount";
+    private final String PHONE_ID_ID = "telNumber";
+    private final String BALANCE_ID = "money";
+    private final String RIGHTS_ID = "accessRights";
+
     @Override
     public ArrayList<User> getAllUsers() throws DataAccessException
     {
@@ -121,26 +135,10 @@ public class UserAPIAccess implements UserDataAccess
         return jsonObjectToUser(jsonUser);
     }
 
-    private final String API_DATE_FORMAT = "yyyy-MM-dd";
-
-    private final String ID_ID = "userId";
-    private final String FIRST_NAME_ID = "firstName";
-    private final String LAST_NAME_ID = "lastName";
-    private final String BIRTHDAY_ID = "birthDate";
-    private final String ADDRESS_ID = "address";
-    private final String CITY_ID = "city";
-    private final String ZIP_CODE_ID = "zip";
-    private final String USERNAME_ID = "login";
-    private final String PASSWORD_ID = "password";
-    private final String IBAN_ACCOUNT_ID = "ibanAccount";
-    private final String PHONE_ID_ID = "telNumber";
-    private final String BALANCE_ID = "money";
-    private final String RIGHTS_ID = "accessRights";
-
     private User jsonObjectToUser(JSONObject jsonUser) throws JSONException
     {
         Calendar birthday = Calendar.getInstance();
-        DateFormat format = new SimpleDateFormat(API_DATE_FORMAT);
+        DateFormat format = new SimpleDateFormat(APIConnection.API_DATE_FORMAT);
 
         try
         {
@@ -165,7 +163,7 @@ public class UserAPIAccess implements UserDataAccess
 
     private String userToJSONString(User user) throws JSONException
     {
-        DateFormat format = new SimpleDateFormat(API_DATE_FORMAT);
+        DateFormat format = new SimpleDateFormat(APIConnection.API_DATE_FORMAT);
 
         JSONObject jsonObject = new JSONObject();
 

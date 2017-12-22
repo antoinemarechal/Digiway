@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,11 +8,7 @@
     android:padding="20dp"
     android:gravity="center"
     android:layout_gravity="center"
-    tools:context="com.henallux.digiway.RegisterActivity">
-
-    <!-- FIXME : énorme bug avec le scrolling quand le clavier virtuel s'active
-        ou que le contenu de la scrollview est trop grand pour la hauteur de
-         l'écran -->
+    tools:context="com.henallux.yetee.RegisterActivity">
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
@@ -186,7 +183,7 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 style="@style/DefaultButtonStyle"
                 android:id="@+id/registration_confirm_button"
                 android:text="@string/action_confirm_registration" />

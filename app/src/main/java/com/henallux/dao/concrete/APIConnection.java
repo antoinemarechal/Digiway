@@ -10,13 +10,15 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class APIConnection // TODO gérer 403 = api fermée
+class APIConnection
 {
+    static final String API_DATE_FORMAT = "yyyy-MM-dd";
+
     private static final String BASE_API_URL = "http://digiwayapi.azurewebsites.net/api/";
 
     private static APIConnection instance = null;
 
-    public static APIConnection getInstance()
+    static APIConnection getInstance()
     {
         if(instance == null)
             instance = new APIConnection();
@@ -26,14 +28,14 @@ public class APIConnection // TODO gérer 403 = api fermée
 
     private APIConnection() {}
 
-    public URLConnection connect(String urlAppendix) throws IOException
+    URLConnection connect(String urlAppendix) throws IOException
     {
         URL url = new URL(BASE_API_URL + urlAppendix);
 
         return url.openConnection();
     }
 
-    public String readFromConnection(URLConnection connection) throws IOException
+    String readFromConnection(URLConnection connection) throws IOException
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         StringBuilder sb = new StringBuilder();
@@ -49,7 +51,7 @@ public class APIConnection // TODO gérer 403 = api fermée
         return sb.toString();
     }
 
-    public void writeToConnection(URLConnection connection, String message) throws IOException
+    void writeToConnection(URLConnection connection, String message) throws IOException
     {
         OutputStream out = new BufferedOutputStream(connection.getOutputStream());
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));

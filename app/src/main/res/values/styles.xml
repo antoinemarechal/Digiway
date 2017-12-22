@@ -25,12 +25,15 @@
     </style>
 
     <style name="DefaultButtonStyle">
-        <item name="android:backgroundTint" tools:targetApi="lollipop">@android:color/background_light</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">
+            @android:color/background_light
+        </item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">250dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">16dp</item>
+        <item name="backgroundTint">@android:color/background_light</item>
     </style>
 
     <style name="DefaultFormFieldStyle">
@@ -39,5 +42,14 @@
         <item name="android:inputType">text</item>
         <item name="android:maxLines">1</item>
     </style>
+
+    <style name="FullscreenTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="FullscreenTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="FullscreenTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

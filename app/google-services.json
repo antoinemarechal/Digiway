@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "481250812850",
+    "firebase_url": "https://inbound-lexicon-188923.firebaseio.com",
+    "project_id": "inbound-lexicon-188923",
+    "storage_bucket": "inbound-lexicon-188923.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481250812850:android:6a7726af33414e51",
+        "android_client_info": {
+          "package_name": "com.henallux.yetee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481250812850-9s2ovbs7oh82v87pvo7ciempbju7athu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi1haC6FWFAzArNQDZGdNDXtMGkzaRSaI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

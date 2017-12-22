@@ -10,4 +10,12 @@
     <color name="colorTextFields">#d6d6d6</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="white_overlay">#66FFFFFF</color>
+    <color name="blue_overlay">#66108090</color>
+
+    <!-- Override ZXing scanner view colors -->
+    <color name="viewfinder_mask">#aa000000</color>
+    <color name="viewfinder_laser">#36C9E6</color>
+    <color name="viewfinder_border">#108090</color>
+
 </resources>

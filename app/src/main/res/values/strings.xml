@@ -1,8 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY toReplaceChar "µ">
+]>
 <resources>
     <string name="app_name">Yetee</string>
 
-    <!-- Strings related to login -->
-    <string name="descr_app_logo">Logo de l\'application Yetee</string>
+    <!-- Strings related to login activity -->
+    <string name="desc_app_logo">Logo de l\'application Yetee</string>
     <string name="prompt_username">Nom d\'utilisateur</string>
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Se connecter</string>
@@ -15,7 +19,7 @@
     <string name="error_data_parsing">Une erreur s\'est produite lors du traitement des données</string>
     <string name="error_sha512">La technologie de chiffrement du mot de passe n\'est pas supportée sur cet appareil</string>
 
-    <!-- Strings related to registration -->
+    <!-- Strings related to registration activity -->
     <string name="title_activity_register">Inscription</string>
     <string name="prompt_first_name">Prénom</string>
     <string name="prompt_last_name">Nom</string>
@@ -41,9 +45,104 @@
         <item>Belgique</item>
     </string-array>
 
-    <!-- Strings related to home -->
+    <!-- Strings related to home activity -->
     <string name="title_activity_home">Accueil</string>
+    <string name="desc_qr_code_icon">Icône de QR code</string>
+    <string name="desc_find_your_icon">Icône de loupe</string>
+    <string name="desc_event_map_icon">Icône de carte pliante</string>
+    <string name="drawer_open">Ouvrir le menu de navigation</string>
+    <string name="drawer_close">Fermer le menu de navigation</string>
+    <string name="text_evenement_square_title">EVENEMENT</string>
+    <string name="text_deposit_square_title">VOTRE SOLDE</string>
+    <string name="text_scanner_square_title">SCANNER</string>
+    <string name="text_find_your_square_title">TROUVE TON&#8230;</string>
+    <string name="text_event_map_square_title">CARTE</string>
+    <string name="text_no_event_selected">Pas d\'évènement sélectionné</string>
+    <string-array name="drawer_menu_options_array">
+        <item>@string/title_activity_event_list</item>
+        <item>@string/title_activity_event_map</item>
+        <item>@string/title_activity_find_your</item>
+        <item>Solde restant</item>
+        <item>Social</item>
+        <item>Options</item>
+    </string-array>
+    <string name="error_no_event_selected">Vous devez sélectionner un évènement dans le menu pour pouvoir accéder à cet écran</string>
+
+    <!-- Strings related to event list activity -->
+    <string name="title_activity_event_list">Evènements à venir</string>
+    <string name="text_event_details">&toReplaceChar;\n&toReplaceChar;\nPrix du ticket : &toReplaceChar;</string>
+    <string name="text_network_connection_required_event_list">L\'application nécessite une connexion à un réseau pour pouvoir lister les évènements partenaires</string>
+    <string name="info_no_events_to_come">Aucun évènement partenaire n\'est planifié dans les mois à venir</string>
+
+    <!-- Strings related to event map activity -->
+    <string name="title_activity_event_map">Carte de l\'évènement</string>
+    <string name="text_event_city">Ville de déroulement</string>
+    <string name="text_misc">Divers</string>
+    <string name="text_map_legend">Légende</string>
+    <string name="text_network_connection_required_map">L\'application nécessite une connexion à un réseau pour pouvoir afficher correctement la carte de l\'évènement</string>
+    <string name="error_automatic_location_failed">La localisation automatique de l\'évènement a échoué</string>
+
+    <!-- Strings related to find your... activity -->
+    <string name="title_activity_find_your">Trouve ton&#8230;</string>
+
+    <!-- Strings related to balance activity -->
+    <string name="title_activity_balance">Créditer votre compte</string>
+    <string name="desc_paypal_logo">Logo de paypal</string>
+    <string name="desc_visa_logo">Logo de visa</string>
+    <string name="text_billing_details">Solde à disposition :\n\n\t&toReplaceChar;\n\nDétails du compte :\n\n\tMme/Mr &toReplaceChar; &toReplaceChar;\n\t&toReplaceChar;\n\t&toReplaceChar;, &toReplaceChar;\n\t&toReplaceChar;\n\t&toReplaceChar;</string>
+    <string name="text_no_account_associated">Pas encore de compte associé</string>
+    <string name="info_successful_deposit">Vous avez crédité µ € à votre compte</string>
+    <string name="prompt_credit_amount">Montant à créditer (entre 1 et 30€)</string>
+    <string name="action_submit">Soumettre</string>
+    <string name="error_invalid_amount">Montant à créditer invalide</string>
+
+    <!-- Strings related to social activity -->
+    <string name="title_activity_social">Invitez vos amis</string>
+    <string name="desc_qr_code">QR code identifiant le compte courant</string>
+    <string name="text_qr_code_instructions">Faites scanner ce code pour inviter quelqu\'un à rejoindre vos amis</string>
+    <string name="error_qr_code_generation">Une erreur s\'est produite lors de la génération du QR code</string>
+
+    <!-- Strings related to scanner activity -->
+    <string name="title_activity_scanner">Scanner un QR code</string>
+    <string name="info_camera_permission_granted">Permission accordée, vous pouvez accéder à la caméra</string>
+    <string name="info_friend_request_confirmed">&toReplaceChar; a été ajouté à vos amis</string>
+    <string name="text_add_friend_title">Ajouter un ami</string>
+    <string name="text_add_friend">Voulez vous ajouter &toReplaceChar; à vos amis ?</string>
+    <string name="text_error">Erreur</string>
+    <string name="action_yes">Oui</string>
+    <string name="action_no">Non</string>
+    <string name="action_ok">OK</string>
+    <string name="action_accept">Accepter</string>
+    <string name="action_cancel">Annuler</string>
+    <string name="error_camera_permission_denied">Permission refusée, vous ne pouvez pas accéder à la caméra</string>
+    <string name="error_unknown_qr_code_format">Ce QR code n\'est pas reconnu par l\'application</string>
+    <string name="error_malformed_qr_code">Le contenu de ce QR code est invalide</string>
+    <string name="error_friend_already_requested">Vous avez déjà demandé cet utilisateur en ami</string>
+
+    <!-- Strings related to settings activity -->
+    <string name="title_activity_settings">Options</string>
+    <string name="pref_header_general">Général</string>
+        <string name="pref_title_memory">Historique</string>
+        <string name="pref_description_memory">Permet de garder en mémoire le dernier évènement sélectionné</string>
+        <string name="pref_title_caching">Cache</string>
+        <string name="pref_description_caching">Permet de garder en mémoire les données des évènements</string>
+    <string name="pref_header_notifications">Notifications</string>
+        <string name="pref_title_notifications">Autoriser les notifications</string>
+    <string name="pref_header_data_sync">Données &amp; synchronisation</string>
+        <string name="pref_title_sync_frequency">Synchronisation des nouveautés</string>
+        <string-array name="pref_sync_frequency_titles">
+            <item>15 minutes</item>
+            <item>30 minutes</item>
+            <item>1 heure</item>
+            <item>3 heures</item>
+            <item>6 heures</item>
+            <item>Jamais</item>
+        </string-array>
 
     <!-- Misc Strings -->
     <string name="global_date_format">dd/MM/yyyy</string>
+    <string name="global_permission_already_granted">Permission déjà accordée à l\'application</string>
+    <string name="global_replace_character">&toReplaceChar;</string>
+    <string name="text_network_connection_required_default">L\'application nécessite une connexion à un réseau pour pouvoir réaliser cette action</string>
+
 </resources>

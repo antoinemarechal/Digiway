@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="settings_memory"
+        android:title="@string/pref_title_memory"
+        android:summary="@string/pref_description_memory" />
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="settings_caching"
+        android:title="@string/pref_title_caching"
+        android:summary="@string/pref_description_caching" />
+
+</PreferenceScreen>
